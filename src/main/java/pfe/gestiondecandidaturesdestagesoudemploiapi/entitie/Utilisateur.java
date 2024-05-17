@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 
 import javax.management.relation.Role;
 
-@Entity
-@Table(name = "utilisateurs")
+
 public abstract class Utilisateur {
 
     @Id
@@ -27,7 +26,14 @@ public abstract class Utilisateur {
     @Column(nullable = false)
     private Role role;
 
-    // Getters, setters et autres méthodes
+    public Utilisateur(String nom, String prenom, String email, String motDePasse) {
+    }
+
+    public Utilisateur() {
+
+    }
+
+    // Getters, setters
 
     public Long getId() {
         return id;

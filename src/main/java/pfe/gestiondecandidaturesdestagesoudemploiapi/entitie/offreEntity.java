@@ -24,8 +24,9 @@ public class offreEntity {
     @Column(nullable = false)
     private Integer periodeEnMois;
 
-    @Column(nullable = false)
-    private String domaine;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "domaine_id")
+    private Domaine domaine;
 
     @Column(nullable = false)
     private String mode;
@@ -33,7 +34,19 @@ public class offreEntity {
     @OneToMany(mappedBy = "offre", cascade = CascadeType.ALL)
     private List<CompetenceOffre> competencesOffres = new ArrayList<>();
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "responsable_rh_id")
+    private ResponsableRH responsableRH;
+
     // Getters and setters
+    public ResponsableRH getResponsableRH() {
+        return responsableRH;
+    }
+
+    public void setResponsableRH(ResponsableRH responsableRH) {
+        this.responsableRH = responsableRH;
+    }
+
 
     public Long getId() {
         return id;
@@ -67,11 +80,11 @@ public class offreEntity {
         this.periodeEnMois = periodeEnMois;
     }
 
-    public String getDomaine() {
+    public Domaine getDomaine() {
         return domaine;
     }
 
-    public void setDomaine(String domaine) {
+    public void setDomaine(Domaine domaine) {
         this.domaine = domaine;
     }
 
