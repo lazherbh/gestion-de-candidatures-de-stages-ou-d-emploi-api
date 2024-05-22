@@ -11,7 +11,7 @@ public class CompetenceOffre {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "offre_id")
-    private offreEntity offre;
+    private Offre offre;
 
     @Column(nullable = false)
     private String nomCompetence;
@@ -29,11 +29,11 @@ public class CompetenceOffre {
         this.id = id;
     }
 
-    public offreEntity getOffre() {
+    public Offre getOffre() {
         return offre;
     }
 
-    public void setOffre(offreEntity offre) {
+    public void setOffre(Offre offre) {
         this.offre = offre;
     }
 

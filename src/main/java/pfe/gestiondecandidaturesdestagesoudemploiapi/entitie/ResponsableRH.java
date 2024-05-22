@@ -1,11 +1,15 @@
 package pfe.gestiondecandidaturesdestagesoudemploiapi.entitie;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "responsables_rh")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorValue("RESPONSABLE_RH")
+@Getter
+@Setter
 public class ResponsableRH extends Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

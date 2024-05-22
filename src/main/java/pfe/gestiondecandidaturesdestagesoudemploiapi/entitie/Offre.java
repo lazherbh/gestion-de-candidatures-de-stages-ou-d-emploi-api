@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class offreEntity {
+public class Offre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -102,5 +102,9 @@ public class offreEntity {
 
     public void setCompetencesOffres(List<CompetenceOffre> competencesOffres) {
         this.competencesOffres = competencesOffres;
+    }
+
+    public void setArchive(boolean b) {
+
     }
 }
