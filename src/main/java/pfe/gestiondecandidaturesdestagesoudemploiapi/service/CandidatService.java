@@ -2,9 +2,9 @@ package pfe.gestiondecandidaturesdestagesoudemploiapi.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pfe.gestiondecandidaturesdestagesoudemploiapi.entitie.Candidat;
 import pfe.gestiondecandidaturesdestagesoudemploiapi.entitie.Candidature;
 import pfe.gestiondecandidaturesdestagesoudemploiapi.entitie.Offre;
+import pfe.gestiondecandidaturesdestagesoudemploiapi.entitie.Utilisateur;
 import pfe.gestiondecandidaturesdestagesoudemploiapi.repositorie.CandidatRepository;
 import pfe.gestiondecandidaturesdestagesoudemploiapi.repositorie.CandidatureRepository;
 import pfe.gestiondecandidaturesdestagesoudemploiapi.repositorie.OffreRepository;
@@ -26,7 +26,7 @@ public class CandidatService {
 
     // Méthode postuler
     public void postuler(Long candidatId, Long offreId) {
-        Candidat candidat = candidatRepository.findById(candidatId).orElseThrow();
+        Utilisateur candidat = candidatRepository.findById(candidatId).orElseThrow();
         Offre offre = offreRepository.findById(offreId).orElseThrow();
 
         // Vérifier l'éligibilité du candidat et l'existence d'une candidature existante
@@ -44,7 +44,7 @@ public class CandidatService {
 
     // Méthode consulterHistoriqueCandidature
     public List<Candidature> consulterHistoriqueCandidature(Long candidatId) {
-        Candidat candidat = candidatRepository.findById(candidatId).orElseThrow();
+        Utilisateur candidat = candidatRepository.findById(candidatId).orElseThrow();
         List<Candidature> candidatures = candidatureRepository.findByCandidat(candidat);
 
         // Enrichir les candidatures avec des informations détaillées

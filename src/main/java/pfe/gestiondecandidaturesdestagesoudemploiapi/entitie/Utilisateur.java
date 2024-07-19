@@ -2,10 +2,13 @@ package pfe.gestiondecandidaturesdestagesoudemploiapi.entitie;
 
 import jakarta.persistence.*;
 
-import javax.management.relation.Role;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 
-public abstract class Utilisateur {
+@Entity
+public  class Utilisateur {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,16 +27,33 @@ public abstract class Utilisateur {
     private String motDePasse;
 
     @Column(nullable = false)
-    private Role role;
+    private String username;
 
-    public Utilisateur(String nom, String prenom, String email, String motDePasse) {
+    @ManyToMany(fetch = FetchType.EAGER) //on a utilisé eager car à chque fois je vais charger un utilisateur, j'ai besion de telecharger ses roles
+    private Collection<Role> roles = new ArrayList<>();
+
+    public Utilisateur(Long id, String nom, String prenom, String email, String motDePasse, String username, Collection<Role> roles) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.motDePasse = motDePasse;
+        this.username = username;
+        this.roles = roles;
     }
 
     public Utilisateur() {
 
     }
 
-    // Getters, setters
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+// Getters, setters
 
     public Long getId() {
         return id;
@@ -75,11 +95,15 @@ public abstract class Utilisateur {
         this.motDePasse = motDePasse;
     }
 
-    public Role getRole() {
-        return role;
+    public Collection<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Collection<Offre> getOffres() {
+        return new ArrayList<>();
     }
 }

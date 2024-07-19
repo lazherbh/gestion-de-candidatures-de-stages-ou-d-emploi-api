@@ -1,14 +1,15 @@
 package pfe.gestiondecandidaturesdestagesoudemploiapi.entitie;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+
+
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "offres")
 public class Offre {
 
     @Id
@@ -35,18 +36,19 @@ public class Offre {
     private List<CompetenceOffre> competencesOffres = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "responsable_rh_id")
-    private ResponsableRH responsableRH;
+    @JoinColumn(name = "utilisateur_id")
+    private Utilisateur utilisateur;
 
     // Getters and setters
-    public ResponsableRH getResponsableRH() {
-        return responsableRH;
+
+
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
     }
 
-    public void setResponsableRH(ResponsableRH responsableRH) {
-        this.responsableRH = responsableRH;
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
     }
-
 
     public Long getId() {
         return id;
@@ -106,5 +108,9 @@ public class Offre {
 
     public void setArchive(boolean b) {
 
+    }
+
+    public LocalDate getDatePublication() {
+        return LocalDate.now();
     }
 }

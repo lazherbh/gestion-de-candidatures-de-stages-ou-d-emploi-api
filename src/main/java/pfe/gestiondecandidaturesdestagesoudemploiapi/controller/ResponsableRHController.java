@@ -19,10 +19,29 @@ public class ResponsableRHController {
     private ResponsableRHService responsableRHService;
 
     // Endpoint pour lister toutes les offres
-    @GetMapping
-    public ResponseEntity<List<Offre>> listerOffres() {
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping()
+    public ResponseEntity<List<Offre>> getOffres() {
         List<Offre> offres = responsableRHService.listerOffres();
         return ResponseEntity.ok(offres);
+    }
+    @GetMapping("/{idOffre}")
+    public ResponseEntity<Offre> getOneOffre(@PathVariable Long idOffre) {
+        Offre offre = responsableRHService.getOneOffre(idOffre);
+        return ResponseEntity.ok(offre);
+    }
+    // Create Offer (POST)
+    @PostMapping("/offres")
+    public ResponseEntity<Offre> creerOffre(@RequestBody Offre offre) {
+        responsableRHService.creerOffre(offre);
+        return ResponseEntity.ok(offre);
+    }
+
+    // Update Offer (PUT)
+    @PutMapping("/offres/{offreId}")
+    public ResponseEntity<Void> modifierOffre(@PathVariable Long offreId, @RequestBody Offre offre) {
+        responsableRHService.modifierOffre(offre);
+        return ResponseEntity.noContent().build();
     }
 
     // Endpoint pour archiver une offre (à adapter selon votre implémentation)

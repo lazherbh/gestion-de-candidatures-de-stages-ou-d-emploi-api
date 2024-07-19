@@ -17,5 +17,12 @@ public class Domaine {
     @Column(nullable = false)
     private String nom;
 
-    // Getters, setters et autres méthodes spécifiques au domaine
+    @Override
+    public String toString() {
+        return "Domaine{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                '}';
+    }
+// Getters, setters et autres méthodes spécifiques au domaine
 }

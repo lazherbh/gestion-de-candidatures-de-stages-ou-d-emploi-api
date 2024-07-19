@@ -5,5 +5,6 @@ import org.springframework.stereotype.Repository;
 import pfe.gestiondecandidaturesdestagesoudemploiapi.entitie.Utilisateur;
 
 @Repository
-public interface ResponsableRHRepository extends JpaRepository<Utilisateur, Long> {
+public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
+    Utilisateur findByUsername(String username);
 }

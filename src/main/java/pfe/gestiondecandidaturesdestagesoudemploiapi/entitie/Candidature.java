@@ -19,7 +19,7 @@ public class Candidature {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "candidat_id")
-    private Candidat candidat;
+    private Utilisateur candidat;
 
     @Column(nullable = false)
     private String statut; // (en_cours/entretien_programme/refuse/entretien_technique_confirme/entretien_RH_confirme/accepte)
@@ -33,8 +33,9 @@ public class Candidature {
     @Column
     private String motifRefus;
 
-    @MapKey(name = "competence")
     @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "candidature_niveaux_acquis", joinColumns = @JoinColumn(name = "candidature_id"))
+    @MapKeyColumn(name = "competence_id")
     @Column(name = "niveau_acquis")
     private Map<CompetenceOffre, String> niveauxAcquis; // (connaissance_theorique/connaissance_pratique/debutant/intermediaire/maitrise/aucune_competence)
 
@@ -59,11 +60,11 @@ public class Candidature {
         this.offre = offre;
     }
 
-    public Candidat getCandidat() {
+    public Utilisateur getCandidat() {
         return candidat;
     }
 
-    public void setCandidat(Candidat candidat) {
+    public void setCandidat(Utilisateur candidat) {
         this.candidat = candidat;
     }
 

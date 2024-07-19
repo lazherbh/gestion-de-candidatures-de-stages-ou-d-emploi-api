@@ -2,9 +2,9 @@ package pfe.gestiondecandidaturesdestagesoudemploiapi.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pfe.gestiondecandidaturesdestagesoudemploiapi.entitie.Candidat;
 import pfe.gestiondecandidaturesdestagesoudemploiapi.entitie.Candidature;
 import pfe.gestiondecandidaturesdestagesoudemploiapi.entitie.Offre;
+import pfe.gestiondecandidaturesdestagesoudemploiapi.entitie.Utilisateur;
 import pfe.gestiondecandidaturesdestagesoudemploiapi.repositorie.CandidatRepository;
 import pfe.gestiondecandidaturesdestagesoudemploiapi.repositorie.CandidatureRepository;
 import pfe.gestiondecandidaturesdestagesoudemploiapi.repositorie.OffreRepository;
@@ -14,6 +14,9 @@ import java.util.List;
 
 @Service
 public class ResponsableRHService {
+
+    @Autowired
+    private  ManagerService managerService;
 
     @Autowired
     private OffreRepository offreRepository;
@@ -48,11 +51,30 @@ public class ResponsableRHService {
         
         return offreRepository.findAll();
     }
+    public Offre getOneOffre(Long idOffre) {
+        // Implement logic to retrieve the Offre object with the given id
+        // For example, using a repository or database access layer
+        Offre offre = offreRepository.findById(idOffre).orElseThrow(  );
+        return offre;
+    }
+    /*Méthode publierOffre
+    public void publierOffre(long offreId) {
+        Offre offre = offreRepository.findById(offreId).orElseThrow();
 
+        if (!offre.isValide()) {
+            // Offer not validated, delete it
+            offreRepository.delete(offre);
+            return;
+        }
+        offre.setDatePublication(LocalDate.now());
+        offreRepository.save(offre);
+
+    }
+*/
     // Méthode gérerCandidatures
     public void créerCandidature(Long offreId, Long candidatId) {
         Offre offre = offreRepository.findById(offreId).orElseThrow();
-        Candidat candidat = candidatRepository.findById(candidatId).orElseThrow();
+        Utilisateur candidat = candidatRepository.findById(candidatId).orElseThrow();
 
         // Vérifier si le candidat est éligible pour l'offre
         // ...
@@ -103,7 +125,7 @@ public class ResponsableRHService {
 
         // Enrichir les candidatures avec des informations supplémentaires (candidat, statut, ...)
         for (Candidature candidature : candidatures) {
-            Candidat candidat = candidatRepository.findById(candidature.getCandidat().getId()).orElseThrow();
+            Utilisateur candidat = candidatRepository.findById(candidature.getCandidat().getId()).orElseThrow();
             candidature.setCandidat(candidat);
 
             // Enrichir avec d'autres informations selon vos besoins (statut, date entretien, ...)

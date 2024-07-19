@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pfe.gestiondecandidaturesdestagesoudemploiapi.entitie.Utilisateur;
 
 @Repository
-public interface ResponsableRHRepository extends JpaRepository<Utilisateur, Long> {
+public interface ValidateurRepository extends JpaRepository<Utilisateur, Long> {
 }

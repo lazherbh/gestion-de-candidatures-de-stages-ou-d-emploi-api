@@ -10,7 +10,7 @@ public class CompetenceOffre {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "offre_id")
+    @JoinColumn(name = "offre_id",nullable =true )
     private Offre offre;
 
     @Column(nullable = false)
